@@ -1,52 +1,60 @@
-class Usuario {
-    constructor(nombre, apellido, libros, mascotas) {
-        this.nombre = nombre
-        this.apellido = apellido
-        this.libros = libros
-        this.mascotas = mascotas
-    }
+const Contenedor = require('./contenedor.js')
 
-    getFullName() {
-        return `${this.nombre} ${this.apellido}`
-    }
-
-    addMascota(mascota) {
-        this.mascotas.push(mascota)
-    }
-
-    countMascotas() {
-        return this.mascotas.length
-    }
-
-    addBook(nombre, autor) {
-        this.libros.push({
-            nombre,
-            autor
-        })
-    }
-
-    getBookNames() {
-        return this.libros.map(libro => libro.nombre)
-    }
+const prod1 = {
+    name: "Berry Cheesecake",
+    description: "New York-style Cheesecake with Homemade Red Fruit Jam.",
+    category: "Vegan",
+    price: 3600,
+    stock: 5,
+    img: "./img/CheeseCake.png"
 }
 
-//Crear un objeto
-let usuario = new Usuario('Tsue', 'Motosono', [{ nombre: 'It Starts with Us', autor: 'Colleen Hoover' }], ['Nako', 'Momo'])
+const prod2 = {
+    name: "Choco Oreo Cake",
+    description: "Layers of Oreo Cookies interspersed with layers of Caramel Sauce and Cream Cheese.",
+    category: "Premium",
+    price: 4500,
+    stock: 6,
+    img: "./img/ChocoOreo.png"
+}
 
-//Nombre completo
-console.log(usuario.getFullName())
+const prod3 = {
+    name: "Chocolate Cake",
+    description: "4 floors of the best Chocolate Cake in the world.",
+    category: "Premium",
+    price: 4300,
+    stock: 8,
+    img: "./img/Chocotorta.png"
+}
 
-//Agregar Mascota y mostrar cantidad de mascotas
-console.log(usuario.mascotas)
-console.log(`Cantidad Mascotas: ${usuario.countMascotas()}`)
-usuario.addMascota('Vicco')
-console.log(usuario.mascotas)
-console.log(`Cantidad Mascotas: ${usuario.countMascotas()}`)
+async function main() {
+    const contenedor = new Contenedor('./products.txt')
 
-//Agregar libros al Array
-console.log(usuario.libros)
-usuario.addBook('Almendra', 'Won-pyung Sohn')
-console.log(usuario.libros)
+    //guarda los 3 productos
+    await contenedor.save(prod1)
+    await contenedor.save(prod2)
+    await contenedor.save(prod3)
 
-//Obtener Array con nombres de libros
-console.log('Nombre de Libros:', usuario.getBookNames())
+    //obtiene todos los productos
+    await contenedor.getAll()
+
+    //busca el producto con id=2
+    let search1 = await contenedor.getById(2)
+    console.log(search1);
+
+    //busca el producto con id=20, no existe
+    let search2 = await contenedor.getById(20)
+    console.log(search2);
+
+    //elimina el producto con id=2
+    await contenedor.deleteById(2)
+    let delete1 = await contenedor.getAll()
+    console.log(delete1);
+
+    //elimina todos los productos
+    /* await contenedor.deleteAll()
+    let delete2 = await contenedor.getAll()
+    console.log(delete2); */
+}
+
+main()
