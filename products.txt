@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Berry Cheesecake",
+    "description": "New York-style Cheesecake with Homemade Red Fruit Jam.",
+    "category": "Vegan",
+    "price": 3600,
+    "stock": 5,
+    "img": "https://imgur.com/MxP762H",
+    "id": 1
+  },
+  {
+    "name": "Chocolate Cake",
+    "description": "4 floors of the best Chocolate Cake in the world.",
+    "category": "Premium",
+    "price": 4300,
+    "stock": 8,
+    "img": "https://imgur.com/UIebbx7",
+    "id": 2
+  },
+  {
+    "name": "Choco Oreo Cake",
+    "description": "Layers of Oreo Cookies interspersed with layers of Caramel Sauce and Cream Cheese.",
+    "category": "Premium",
+    "price": 4500,
+    "stock": 6,
+    "img": "https://imgur.com/ufRDbsj",
+    "id": 3
+  }
+]

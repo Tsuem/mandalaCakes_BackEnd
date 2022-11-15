@@ -9,11 +9,11 @@ class Contenedor {
         const list = await this.getAll()
 
         if (list.length > 0 && list.some((el) => el.name === object.name)) {
-            console.log('This product is already in the catalog');
-            return
+            return console.log('This product is already in the catalog');
         }
 
         let newId
+        
         if(list.length == 0) {
             newId = 1
         } else {
@@ -47,6 +47,16 @@ class Contenedor {
             return list.find(item => item.id === id) ?? null
         } catch (error) {
             throw new Error(`There is no product with that id: ${error}`)
+        }
+    }
+
+    async getRandom() {
+        try {
+            const data = await fs.promises.readFile(this.route, 'utf-8')
+            const parseData = JSON.parse(data)
+            return parseData[Math.floor(Math.random() * (parseData.length))]
+        } catch (error) {
+            return []
         }
     }
 
